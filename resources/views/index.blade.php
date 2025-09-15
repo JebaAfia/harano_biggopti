@@ -138,6 +138,11 @@
       font-size: 15px;
       color: #495057;
     }
+    .cards a.card {
+        text-decoration: none; /* removes underline */
+        color: inherit; /* ensures text color matches card */
+        display: block; /* ensures the whole card is clickable */
+    }
 
     /* Call to Action */
     .cta {
@@ -222,18 +227,14 @@
 
   <!-- Cards Section -->
   <section class="cards" id="cards">
-    <div class="card">
-      <h3>Report Lost Item</h3>
-      <p>Share the details of your lost item so others can help find it.</p>
-    </div>
-    <div class="card">
-      <h3>Report Found Item</h3>
-      <p>Found something valuable? Post it here to return it to the owner.</p>
-    </div>
-    <div class="card">
+    <a  href="" class="card">
+      <h3>Report</h3>
+      <p>Lost something valuable or found an item? Share the details here so we can help return it to its rightful owner quickly and safely.</p>
+    </a>
+    <a href="#" class="card">
       <h3>Browse Listings</h3>
       <p>Check the latest lost & found posts in your community.</p>
-    </div>
+    </a>
   </section>
 
   <!-- Call to Action -->

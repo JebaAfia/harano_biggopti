@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('index');
@@ -25,6 +26,9 @@ Route::middleware('admin')->group(function () {
     Route::get('/update_category/{id}', [CategoryController::class, 'updateCategory'])->name('admin.category.update_category');
     Route::put('/update_category/{id}', [CategoryController::class, 'postUpdateCategory'])->name('admin.category.post_update_category');
     Route::delete('/delete_category/{id}', [CategoryController::class, 'deleteCategory'])->name('admin.category.delete_category');
+
+    Route::get('/add_post', [PostController::class, 'addPost'])->name('admin.post.add_post');
+    Route::post('/add_post', [PostController::class, 'postAddPost'])->name('admin.post.post_add_post');
 });
 
 require __DIR__.'/auth.php';

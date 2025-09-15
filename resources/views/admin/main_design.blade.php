@@ -13,7 +13,6 @@
       color: #333;
     }
     .sidebar {
-      height: 100vh;
       background: #fff;
       border-right: 1px solid #e0e0e0;
       padding: 20px;
@@ -76,41 +75,31 @@
   <div class="d-flex">
     <!-- Sidebar -->
     <div class="sidebar">
-      <h2>Harano Biggopti</h2>
+        <h2>Harano Biggopti</h2>
 
-      <a href="{{ route('index') }}" class="active"><i class="fa fa-home me-2"></i> Home</a>
+        <a href="{{ route('index') }}" class="active"><i class="fa fa-home me-2"></i> Home</a>
 
-      <!-- Report Lost Item Dropdown -->
-      <a data-bs-toggle="collapse" href="#lostMenu" role="button" aria-expanded="false" aria-controls="lostMenu">
-        <i class="fa fa-search me-2"></i> Report Lost Item <i class="fa fa-chevron-down float-end"></i>
-      </a>
-      <div class="collapse submenu" id="lostMenu">
-        <a href="#">➤ Add Lost Item</a>
-        <a href="#">➤ View Lost Items</a>
-      </div>
+        <!-- Report Dropdown -->
+        <a data-bs-toggle="collapse" href="#reportMenu" role="button" aria-expanded="false" aria-controls="reportMenu">
+            <i class="fa fa-file-alt me-2"></i> Report <i class="fa fa-chevron-down float-end"></i>
+        </a>
+        <div class="collapse submenu" id="reportMenu">
+            <a href="{{ route('admin.post.add_post') }}">➤ Add Post</a>
+            <a href="#">➤ View Post</a>
+        </div>
 
-      <!-- Report Found Item Dropdown -->
-      <a data-bs-toggle="collapse" href="#foundMenu" role="button" aria-expanded="false" aria-controls="foundMenu">
-        <i class="fa fa-box-open me-2"></i> Report Found Item <i class="fa fa-chevron-down float-end"></i>
-      </a>
-      <div class="collapse submenu" id="foundMenu">
-        <a href="#">➤ Add Found Item</a>
-        <a href="#">➤ View Found Items</a>
-      </div>
+        <!-- Categories Dropdown -->
+        <a data-bs-toggle="collapse" href="#categoryMenu" role="button" aria-expanded="false" aria-controls="categoryMenu">
+            <i class="fa fa-list me-2"></i> Categories <i class="fa fa-chevron-down float-end"></i>
+        </a>
+        <div class="collapse submenu" id="categoryMenu">
+            <a href="{{ route('admin.category.add_category') }}">➤ Add Category</a>
+            <a href="{{ route('admin.category.view_category') }}">➤ View Categories</a>
+        </div>
 
-      <!-- Categories Dropdown -->
-      <a data-bs-toggle="collapse" href="#categoryMenu" role="button" aria-expanded="false" aria-controls="categoryMenu">
-        <i class="fa fa-list me-2"></i> Categories <i class="fa fa-chevron-down float-end"></i>
-      </a>
-      <div class="collapse submenu" id="categoryMenu">
-        <a href="{{ route('admin.category.add_category') }}">➤ Add Category</a>
-        <a href="{{ route('admin.category.view_category') }}">➤ View Categories</a>
-      </div>
-
-      <!-- Users -->
-      <a href="#"><i class="fa fa-users me-2"></i> Users</a>
+        <!-- Users -->
+        <a href="#"><i class="fa fa-users me-2"></i> Users</a>
     </div>
-
     <!-- Main Content -->
     <div class="flex-grow-1">
       <!-- Topbar -->
@@ -154,13 +143,14 @@
               <h2>32</h2>
             </div>
           </div>
+          <section>
+            @yield('add_category')
+            @yield('view_category')
+            @yield('update_category')
+            @yield('add_post')
+        </section>
         </div>
       </div>
-    <section>
-        @yield('add_category')
-        @yield('view_category')
-        @yield('update_category')
-    </section>
     </div>
   </div>
 

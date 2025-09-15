@@ -1,0 +1,121 @@
+@extends('admin.main_design')
+
+@section('report_found_item')
+@if (session('report_message'))
+    <div class="alert alert-success" role="alert">
+        {{ session('report_message') }}
+    </div>
+@endif
+
+<div class="container-fluid p-4">
+    <h3 class="mb-4" style="color:#2e7d32;">Report Found Item</h3>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <form action="{{ route('admin.item.post_report') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <!-- Item Name -->
+                        <div class="mb-3">
+                            <label for="item_name" class="form-label">Item Name</label>
+                            <input type="text" name="item_name" id="item_name"
+                                   class="form-control @error('item_name') is-invalid @enderror"
+                                   placeholder="e.g., Wallet, Mobile, Keys" required>
+                            @error('item_name')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description" id="description"
+                                      class="form-control @error('description') is-invalid @enderror"
+                                      placeholder="Provide details like color, brand, unique marks..." required></textarea>
+                            @error('description')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Date Found -->
+                        <div class="mb-3">
+                            <label for="date_found" class="form-label">Date Found</label>
+                            <input type="date" name="date_found" id="date_found"
+                                   class="form-control @error('date_found') is-invalid @enderror" required>
+                            @error('date_found')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Time Found -->
+                        <div class="mb-3">
+                            <label for="time_found" class="form-label">Time Found</label>
+                            <input type="time" name="time_found" id="time_found"
+                                   class="form-control @error('time_found') is-invalid @enderror" required>
+                            @error('time_found')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location Found</label>
+                            <input type="text" name="location" id="location"
+                                   class="form-control @error('location') is-invalid @enderror"
+                                   placeholder="Where did you find it?" required>
+                            @error('location')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Contact -->
+                        <div class="mb-3">
+                            <label for="contact" class="form-label">Your Contact</label>
+                            <input type="text" name="contact" id="contact"
+                                   class="form-control @error('contact') is-invalid @enderror"
+                                   placeholder="Email or phone number" required>
+                            @error('contact')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Image -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Upload Image</label>
+                            <input type="file" name="image" id="image"
+                                   class="form-control @error('image') is-invalid @enderror" accept="image/*">
+                            @error('image')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Post Type -->
+                        <div class="mb-3">
+                            <label for="post_type" class="form-label">Post Type</label>
+                            <select name="post_type" id="post_type"
+                                    class="form-select @error('post_type') is-invalid @enderror" required>
+                                <option value="">-- Select Type --</option>
+                                <option value="found" {{ old('post_type') == 'found' ? 'selected' : '' }}>Found</option>
+                                <option value="lost" {{ old('post_type') == 'lost' ? 'selected' : '' }}>Lost</option>
+                            </select>
+                            @error('post_type')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-plus me-1"></i> Submit Report
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

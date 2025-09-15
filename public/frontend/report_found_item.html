@@ -89,6 +89,12 @@
       width: 100%;
     }
 
+    input:focus, textarea:focus, select:focus {
+      border-color: #40916c;
+      outline: none;
+      box-shadow: 0 0 5px rgba(64, 145, 108, 0.3);
+    }
+
     textarea {
       resize: vertical;
       min-height: 120px;
@@ -149,7 +155,7 @@
   <!-- Report Found Item Form -->
   <div class="container">
     <h2>Report Found Item</h2>
-    <form action="#" method="POST">
+    <form action="#" method="POST" enctype="multipart/form-data">
       <div>
         <label for="item-name">Item Name</label>
         <input type="text" id="item-name" name="item_name" placeholder="e.g., Wallet, Mobile, Keys" required>
@@ -163,12 +169,20 @@
         <input type="date" id="date-found" name="date_found" required>
       </div>
       <div>
+        <label for="time-found">Time Found</label>
+        <input type="time" id="time-found" name="time_found" required>
+      </div>
+      <div>
         <label for="location">Location Found</label>
         <input type="text" id="location" name="location" placeholder="Where did you find it?" required>
       </div>
       <div>
         <label for="contact">Your Contact</label>
         <input type="text" id="contact" name="contact" placeholder="Email or phone number" required>
+      </div>
+      <div>
+        <label for="image">Upload Image</label>
+        <input type="file" id="image" name="image" accept="image/*">
       </div>
       <button type="submit">Submit Report</button>
     </form>
