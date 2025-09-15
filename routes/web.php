@@ -29,6 +29,7 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/add_post', [PostController::class, 'addPost'])->name('admin.post.add_post');
     Route::post('/add_post', [PostController::class, 'postAddPost'])->name('admin.post.post_add_post');
+    Route::get('/view_post', [PostController::class, 'viewPost'])->name('admin.post.view_post');
 });
 
 require __DIR__.'/auth.php';

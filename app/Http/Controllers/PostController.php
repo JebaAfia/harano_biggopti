@@ -68,4 +68,10 @@ class PostController extends Controller
         return redirect()->back()->with('post_message', 'Post added successfully!');
     }
 
+    public function viewPost()
+    {
+        $posts = Post::with('category')->latest()->get();
+        return view('admin.post.view_post', compact('posts'));
+    }
+
 }

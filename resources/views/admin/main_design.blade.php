@@ -69,6 +69,56 @@
       justify-content: space-between;
       align-items: center;
     }
+    
+    /* Modal */
+    .stylish-modal {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease;
+}
+
+.stylish-header {
+    background: linear-gradient(135deg, #2e7d32, #43a047);
+    padding: 1rem;
+}
+
+.info-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+.info-box:hover {
+    transform: translateY(-3px);
+}
+
+.preview-img-small {
+    width: 60px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+.preview-img-small:hover {
+    transform: scale(1.1);
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
   </style>
 </head>
 <body>
@@ -85,7 +135,7 @@
         </a>
         <div class="collapse submenu" id="reportMenu">
             <a href="{{ route('admin.post.add_post') }}">➤ Add Post</a>
-            <a href="#">➤ View Post</a>
+            <a href="{{ route('admin.post.view_post') }}">➤ View Post</a>
         </div>
 
         <!-- Categories Dropdown -->
@@ -148,6 +198,7 @@
             @yield('view_category')
             @yield('update_category')
             @yield('add_post')
+            @yield('view_post')
         </section>
         </div>
       </div>
