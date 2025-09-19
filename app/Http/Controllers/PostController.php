@@ -166,19 +166,16 @@ class PostController extends Controller
         return view('post.all_posts', compact('posts', 'categories'));
     }
 
-    public function filterByDateOrder($order)
+   public function filterByDate(Request $request)
     {
-        $query = Post::with('category');
+        $date = $request->input('date');
 
-        if ($order === 'newest') {
-            $posts = $query->orderBy('occurrence_date', 'desc')->get();
-        } elseif ($order === 'oldest') {
-            $posts = $query->orderBy('occurrence_date', 'asc')->get();
-        } else {
-            $posts = $query->get();
-        }
+        $posts = Post::with('category')
+            ->whereDate('occurrence_date', $date) // filter by specific date
+            ->paginate(10);
 
         $categories = Category::whereNotNull('parent_id')->get();
+
         return view('post.all_posts', compact('posts', 'categories'));
     }
 

@@ -37,16 +37,11 @@
                 </ul>
             </div>
 
-            <!-- Date Dropdown -->
-            <div class="dropdown">
-                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    Date
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-                    <li><a class="dropdown-item" href="{{ route('posts.filter_date_order', 'newest') }}">Newest on Top</a></li>
-                    <li><a class="dropdown-item" href="{{ route('posts.filter_date_order', 'oldest') }}">Oldest on Top</a></li>
-                </ul>
-            </div>
+            <!-- Date Search -->
+            <form action="{{ route('posts.filter_date') }}" method="GET" class="d-flex">
+                <input type="date" name="date" class="form-control me-2" required>
+                <button type="submit" class="btn btn-outline-success">Search</button>
+            </form>
         </div>
     </nav>
     <!-- 🔹 End Second Navigation Bar -->

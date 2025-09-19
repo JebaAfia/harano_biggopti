@@ -37,7 +37,8 @@ Route::middleware('admin')->group(function () {
     Route::get('/all_posts', [PostController::class, 'allPosts'])->name('post.all_posts');
     Route::get('/posts/category/{id}', [PostController::class, 'filterByCategory'])->name('posts.filter_category');
     Route::get('/posts/type/{type}', [PostController::class, 'filterByType'])->name('posts.filter_type');
-    Route::get('/posts/date/{order}', [PostController::class, 'filterByDateOrder'])->name('posts.filter_date_order');
+    Route::get('/posts/filter/date', [PostController::class, 'filterByDate'])->name('posts.filter_date');
+
 
 
 });
