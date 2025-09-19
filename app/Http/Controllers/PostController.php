@@ -74,4 +74,112 @@ class PostController extends Controller
         return view('admin.post.view_post', compact('posts'));
     }
 
+    public function updatePost($id)
+    {
+        $post = Post::findOrFail($id);
+        $categories = Category::whereNotNull('parent_id')->get();
+
+        return view('admin.post.update_post', compact('post', 'categories'));
+    }
+
+    public function postUpdatePost(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+
+        // ✅ Validate inputs
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'hidden_proof' => 'nullable|string|max:255',
+            'occurrence_time' => 'nullable',
+            'occurrence_date' => 'nullable|date',
+            'location' => 'nullable|string|max:255',
+            'contact_number' => 'nullable|string|max:20',
+            'hide_private_info' => 'nullable|string|max:255',
+            'type' => 'required|in:lost,found',
+            'status' => 'required|in:pending,approved,rejected',
+            'category_id' => 'required|exists:categories,id',
+            'images.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'
+        ]);
+
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->hidden_proof = $request->hidden_proof;
+        $post->occurrence_time = $request->occurrence_time;
+        $post->occurrence_date = $request->occurrence_date;
+        $post->location = $request->location;
+        $post->contact_number = $request->contact_number;
+        $post->hide_private_info = $request->hide_private_info;
+        $post->type = $request->type;
+        $post->status = $request->status;
+        $post->category_id = $request->category_id;
+
+        if ($request->hasFile('images')) {
+            if ($post->images) {
+                $oldImages = json_decode($post->images, true);
+                foreach ($oldImages as $oldImage) {
+                    $oldPath = public_path($oldImage);
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
+                    }
+                }
+            }
+
+            $newImagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/posts'), $filename);
+                $newImagePaths[] = 'uploads/posts/' . $filename;
+            }
+            $post->images = json_encode($newImagePaths);
+        }
+
+        $post->save();
+
+        return redirect()->route('admin.post.view_post')->with('post_message', 'Post updated successfully!');
+    }
+
+    public function deletePost($id){
+        $post = Post::findOrFail($id);
+
+        $post->delete();
+        return redirect()->back()->with('post_message', 'Post is deleted!');
+    }
+
+    public function allPosts(){
+        $posts = Post::with('category')->orderBy('created_at', 'desc')->paginate(10);
+        $categories = Category::whereNotNull('parent_id')->get();
+        return view('post.all_posts', compact('posts', 'categories'));
+    }
+
+    public function filterByCategory($id)
+    {
+        $posts = Post::with('category')->where('category_id', $id)->get();
+        $categories = Category::whereNotNull('parent_id')->get();
+        return view('post.all_posts', compact('posts', 'categories'));
+    }
+
+    public function filterByType($type)
+    {
+        $posts = Post::with('category')->where('type', $type)->get();
+        $categories = Category::whereNotNull('parent_id')->get();
+        return view('post.all_posts', compact('posts', 'categories'));
+    }
+
+    public function filterByDateOrder($order)
+    {
+        $query = Post::with('category');
+
+        if ($order === 'newest') {
+            $posts = $query->orderBy('occurrence_date', 'desc')->get();
+        } elseif ($order === 'oldest') {
+            $posts = $query->orderBy('occurrence_date', 'asc')->get();
+        } else {
+            $posts = $query->get();
+        }
+
+        $categories = Category::whereNotNull('parent_id')->get();
+        return view('post.all_posts', compact('posts', 'categories'));
+    }
+
 }

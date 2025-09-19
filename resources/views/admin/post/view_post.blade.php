@@ -135,8 +135,14 @@
                                     </div>
                                 </div>
                             </div>
-                                <a href="#" class="btn btn-sm btn-info">Edit</a>
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="{{ route('admin.post.update_post', $post->id) }}" class="btn btn-sm btn-info">Edit</a>
+                                <form action="{{ route('admin.post.delete_post', $post->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty

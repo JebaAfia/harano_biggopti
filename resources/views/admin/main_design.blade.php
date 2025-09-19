@@ -69,7 +69,7 @@
       justify-content: space-between;
       align-items: center;
     }
-    
+
     /* Modal */
     .stylish-modal {
     background: rgba(255, 255, 255, 0.85);
@@ -199,6 +199,7 @@
             @yield('update_category')
             @yield('add_post')
             @yield('view_post')
+            @yield('update_post')
         </section>
         </div>
       </div>

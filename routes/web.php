@@ -30,6 +30,16 @@ Route::middleware('admin')->group(function () {
     Route::get('/add_post', [PostController::class, 'addPost'])->name('admin.post.add_post');
     Route::post('/add_post', [PostController::class, 'postAddPost'])->name('admin.post.post_add_post');
     Route::get('/view_post', [PostController::class, 'viewPost'])->name('admin.post.view_post');
+    Route::get('/update_post/{id}', [PostController::class, 'updatePost'])->name('admin.post.update_post');
+    Route::put('/update_post/{id}', [PostController::class, 'postUpdatePost'])->name('admin.post.post_update_post');
+    Route::delete('/delete_post/{id}', [PostController::class, 'deletePost'])->name('admin.post.delete_post');
+
+    Route::get('/all_posts', [PostController::class, 'allPosts'])->name('post.all_posts');
+    Route::get('/posts/category/{id}', [PostController::class, 'filterByCategory'])->name('posts.filter_category');
+    Route::get('/posts/type/{type}', [PostController::class, 'filterByType'])->name('posts.filter_type');
+    Route::get('/posts/date/{order}', [PostController::class, 'filterByDateOrder'])->name('posts.filter_date_order');
+
+
 });
 
 require __DIR__.'/auth.php';
