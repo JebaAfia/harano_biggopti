@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
     return view('index');
@@ -17,6 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
 Route::middleware('admin')->group(function () {
@@ -38,9 +41,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/posts/category/{id}', [PostController::class, 'filterByCategory'])->name('posts.filter_category');
     Route::get('/posts/type/{type}', [PostController::class, 'filterByType'])->name('posts.filter_type');
     Route::get('/posts/filter/date', [PostController::class, 'filterByDate'])->name('posts.filter_date');
-
-
-
+    Route::get('/posts_details/{id}', [PostController::class, 'postsDetails'])->name('post.view_post_details');
 });
 
 require __DIR__.'/auth.php';

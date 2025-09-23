@@ -146,8 +146,12 @@ class PostController extends Controller
         return redirect()->back()->with('post_message', 'Post is deleted!');
     }
 
-    public function allPosts(){
-        $posts = Post::with('category')->orderBy('created_at', 'desc')->paginate(10);
+    public function allPosts(Request $request){
+
+        print_r($request->toArray());
+        // /all_posts?category_id=2&type=post
+        $posts = Post::with('category')->where('status', '=', 'approved')->where($request->toArray())->orderBy('created_at', 'desc')->paginate(10);
+        // $posts = Post::with('category')->orderBy('created_at', 'desc')->paginate(10);
         $categories = Category::whereNotNull('parent_id')->get();
         return view('post.all_posts', compact('posts', 'categories'));
     }
@@ -178,5 +182,12 @@ class PostController extends Controller
 
         return view('post.all_posts', compact('posts', 'categories'));
     }
+
+    public function postsDetails($id)
+    {
+        $post = Post::with('category')->findOrFail($id);
+        return view('post.view_post_details', compact('post'));
+    }
+
 
 }

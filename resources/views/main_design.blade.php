@@ -207,15 +207,22 @@
     <nav>
       <ul>
         <li><a href="{{ route('index') }}">Home</a></li>
-        <li><a href="{{ route('post.all_posts') }}">All Posts</a></li>
+        @auth
+            <li><a href="{{ route('post.all_posts') }}">All Posts</a></li>
+        @else
+            <li><a href="{{ route('login') }}">All Posts</a></li>
+        @endauth
+
         <li><a href="#">Report</a></li>
         <li><a href="#">Contact</a></li>
+
         @if (Auth::check())
             <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
         @else
         <li><a href="{{ route('login') }}">Log In</a></li>
         <li><a href="{{ route('register') }}">Sign Up</a></li>
         @endif
+        
       </ul>
     </nav>
   </header>
@@ -223,6 +230,7 @@
   <section>
     @yield('index')
     @yield('post.all_posts')
+    @yield('post.view_post_details')
   </section>
 
 

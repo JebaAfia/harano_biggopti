@@ -53,8 +53,8 @@
                 $firstImage = $images[0] ?? null;
             @endphp
 
-            <div class="col-md-8 mb-3"> {{-- Smaller row width --}}
-                <div class="d-flex border shadow-sm">
+            <a href="{{ route('post.view_post_details', $post->id) }}" class="text-decoration-none text-dark">
+                <div class="d-flex border shadow-sm hover-shadow">
                     <!-- Image -->
                     <div class="flex-shrink-0" style="width: 200px; height: 150px; overflow: hidden;">
                         @if($firstImage)
@@ -72,7 +72,8 @@
                         <p class="mb-0"><strong>Category:</strong> {{ $post->category->category_name ?? 'Uncategorized' }}</p>
                     </div>
                 </div>
-            </div>
+            </a>
+
         @empty
             <div class="col-12 text-center">
                 <p class="text-muted">No posts found.</p>
