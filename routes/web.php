@@ -20,6 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    Route::get('/new_post', [PostController::class, 'newPost'])->name('post.new_post');
+    Route::post('/new_post', [PostController::class, 'postNewPost'])->name('post.post_new_post');
 });
 
 Route::middleware('admin')->group(function () {

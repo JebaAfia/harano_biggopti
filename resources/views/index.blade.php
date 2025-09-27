@@ -12,8 +12,8 @@
 
   <!-- Cards Section -->
   <section class="cards" id="cards">
-    <a  href="" class="card">
-      <h3>Report</h3>
+    <a  href="{{ route('post.new_post') }}" class="card">
+      <h3>New Post</h3>
       <p>Lost something valuable or found an item? Share the details here so we can help return it to its rightful owner quickly and safely.</p>
     </a>
     <a href="#" class="card">
@@ -29,5 +29,5 @@
     <button>Join Now</button>
   </section>
 
-  
+
 @endsection

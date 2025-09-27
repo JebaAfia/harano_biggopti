@@ -177,7 +177,6 @@
                                 <i class="fa fa-plus me-1"></i> Add Post
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>

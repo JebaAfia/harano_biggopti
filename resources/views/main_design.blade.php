@@ -197,6 +197,96 @@
       scroll-behavior: smooth;
     }
 
+    .report {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .report h2 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #2e7d32;
+    }
+
+    .report p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 30px;
+    }
+
+    .report-form {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    }
+
+    .form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+    border-color: #56ab2f;
+    outline: none;
+    box-shadow: 0 0 5px rgba(86, 171, 47, 0.4);
+    }
+
+    textarea {
+    resize: vertical;
+    min-height: 100px;
+    }
+
+    .btn-submit {
+    background: #56ab2f;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-submit:hover {
+    background: #3d7d1f;
+    transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+    .report-form {
+        padding: 20px;
+    }
+
+    .btn-submit {
+        width: 100%;
+    }
+    }
+
   </style>
 </head>
 <body>
@@ -222,7 +312,7 @@
         <li><a href="{{ route('login') }}">Log In</a></li>
         <li><a href="{{ route('register') }}">Sign Up</a></li>
         @endif
-        
+
       </ul>
     </nav>
   </header>
@@ -231,6 +321,7 @@
     @yield('index')
     @yield('post.all_posts')
     @yield('post.view_post_details')
+    @yield('post.new_post')
   </section>
 
 
