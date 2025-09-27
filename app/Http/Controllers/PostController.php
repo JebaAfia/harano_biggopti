@@ -146,42 +146,28 @@ class PostController extends Controller
         return redirect()->back()->with('post_message', 'Post is deleted!');
     }
 
-    public function allPosts(Request $request){
-
-        print_r($request->toArray());
-        // /all_posts?category_id=2&type=post
-        $posts = Post::with('category')->where('status', '=', 'approved')->where($request->toArray())->orderBy('created_at', 'desc')->paginate(10);
-        // $posts = Post::with('category')->orderBy('created_at', 'desc')->paginate(10);
-        $categories = Category::whereNotNull('parent_id')->get();
-        return view('post.all_posts', compact('posts', 'categories'));
-    }
-
-    public function filterByCategory($id)
+    public function allPosts(Request $request)
     {
-        $posts = Post::with('category')->where('category_id', $id)->get();
+        $query = Post::with('category')->where('status', '=', 'approved')->orderBy('created_at', 'desc');
         $categories = Category::whereNotNull('parent_id')->get();
+
+        if (isset($request->title) && ($request->title != null)) {
+            $query->where('title', $request->title);
+        }
+
+        if (isset($request->category_id) && ($request->category_id != null)) {
+            $query->where('category_id', $request->category_id);
+        }
+        if (isset($request->type) && ($request->type != null)) {
+            $query->where('type', $request->type);
+        }
+        if (isset($request->occurrence_date) && ($request->occurrence_date != null)) {
+            $query->where('occurrence_date', $request->occurrence_date);
+        }
+        $posts = $query->get();
         return view('post.all_posts', compact('posts', 'categories'));
     }
 
-    public function filterByType($type)
-    {
-        $posts = Post::with('category')->where('type', $type)->get();
-        $categories = Category::whereNotNull('parent_id')->get();
-        return view('post.all_posts', compact('posts', 'categories'));
-    }
-
-   public function filterByDate(Request $request)
-    {
-        $date = $request->input('date');
-
-        $posts = Post::with('category')
-            ->whereDate('occurrence_date', $date) // filter by specific date
-            ->paginate(10);
-
-        $categories = Category::whereNotNull('parent_id')->get();
-
-        return view('post.all_posts', compact('posts', 'categories'));
-    }
 
     public function postsDetails($id)
     {

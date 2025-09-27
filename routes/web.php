@@ -38,9 +38,6 @@ Route::middleware('admin')->group(function () {
     Route::delete('/delete_post/{id}', [PostController::class, 'deletePost'])->name('admin.post.delete_post');
 
     Route::get('/all_posts', [PostController::class, 'allPosts'])->name('post.all_posts');
-    Route::get('/posts/category/{id}', [PostController::class, 'filterByCategory'])->name('posts.filter_category');
-    Route::get('/posts/type/{type}', [PostController::class, 'filterByType'])->name('posts.filter_type');
-    Route::get('/posts/filter/date', [PostController::class, 'filterByDate'])->name('posts.filter_date');
     Route::get('/posts_details/{id}', [PostController::class, 'postsDetails'])->name('post.view_post_details');
 });
 
