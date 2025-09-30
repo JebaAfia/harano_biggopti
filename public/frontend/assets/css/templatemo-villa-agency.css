@@ -129,9 +129,6 @@ body {
   color: #fff;
 }
 
-.section {
-  margin-top: 120px;
-}
 
 .section-heading {
   margin-bottom: 70px;
@@ -1145,7 +1142,7 @@ Properties Style
 }
 
 .properties .item h4 {
-  font-size: 19px;
+  font-size: 14px;
   margin: 25px 0px;
 }
 
@@ -1795,4 +1792,28 @@ body {
   .contact-page .section-heading {
     margin-right: 100px;
   }
+}
+
+/* Override green with #ee626b */
+.text-success {
+    color: #ee626b !important;
+}
+
+.bg-success {
+    background-color: #0c0909 !important;
+}
+
+.btn-success {
+    background-color: #ee626b !important;
+    border-color: #ee626b !important;
+}
+
+.btn-success:hover {
+    background-color: #d9555d !important; /* darker shade for hover */
+    border-color: #d9555d !important;
+}
+
+.form-select:focus, .form-control:focus {
+    border-color: #ee626b !important;
+    box-shadow: 0 0 0 0.2rem rgba(238, 98, 107, 0.25) !important;
 }

@@ -45,8 +45,8 @@ https://templatemo.com/tm-591-villa-agency
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="{{ route('index') }}" class="active">Home</a></li>
-                      <li><a href="{{ route('post.new_post') }}" class="active">New Post</a></li>
+                      <li><a href="{{ route('index') }}">Home</a></li>
+                      <li><a href="{{ route('post.new_post') }}" >New Post</a></li>
                       @auth
                       <li><a href="{{ route('post.all_posts') }}">All Posts</a></li>
                       @else

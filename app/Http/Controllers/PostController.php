@@ -164,7 +164,7 @@ class PostController extends Controller
         if (isset($request->occurrence_date) && ($request->occurrence_date != null)) {
             $query->where('occurrence_date', $request->occurrence_date);
         }
-        $posts = $query->get();
+        $posts = $query->paginate(3);
         return view('post.all_posts', compact('posts', 'categories'));
     }
 
