@@ -1804,13 +1804,13 @@ body {
 }
 
 .btn-success {
-    background-color: #ee626b !important;
-    border-color: #ee626b !important;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
 }
 
 .btn-success:hover {
-    background-color: #d9555d !important; /* darker shade for hover */
-    border-color: #d9555d !important;
+    background-color: #f35525 !important; /* darker shade for hover */
+    border-color: #f35525 !important;
 }
 
 .form-select:focus, .form-control:focus {

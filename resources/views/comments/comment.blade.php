@@ -20,7 +20,7 @@
             <div class="mb-2">
                 <textarea name="comment" rows="2" class="form-control form-control-sm" placeholder="Write a reply..." required></textarea>
             </div>
-            <button type="submit" class="btn btn-sm btn-outline-primary">Reply</button>
+            <button type="submit" class="btn btn-success">Reply</button>
         </form>
     @else
         <div class="mt-2"><small>Please <a href="{{ route('login') }}">log in</a> to reply.</small></div>
