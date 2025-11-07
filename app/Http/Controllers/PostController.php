@@ -26,7 +26,7 @@ class PostController extends Controller
             'hide_private_info' => 'nullable|string|max:255',
             'images.*'          => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'type'              => 'required|in:lost,found',
-            'status'            => 'required|in:pending,approved',
+            'status'            => 'required|in:pending,approved,resolved',
             'category_id'       => 'required|exists:categories,id',
         ]);
 
@@ -57,6 +57,8 @@ class PostController extends Controller
             'occurrence_time'   => $request->occurrence_time,
             'occurrence_date'   => $request->occurrence_date,
             'location'          => $request->location,
+            'geo_lat'          => $request->latitude,
+            'geo_long'          => $request->longitude,
             'contact_number'    => $request->contact_number,
             'hide_private_info' => $request->hide_private_info,
             'images'            => json_encode($imagePaths),
@@ -97,17 +99,19 @@ class PostController extends Controller
             'contact_number' => 'nullable|string|max:20',
             'hide_private_info' => 'nullable|string|max:255',
             'type' => 'required|in:lost,found',
-            'status' => 'required|in:pending,approved,rejected',
+            'status' => 'required|in:pending,approved,resolved,rejected',
             'category_id' => 'required|exists:categories,id',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'
         ]);
 
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->hidden_proof = $request->hidden_proof;
-        $post->occurrence_time = $request->occurrence_time;
-        $post->occurrence_date = $request->occurrence_date;
-        $post->location = $request->location;
+        $post->title            = $request->title;
+        $post->description      = $request->description;
+        $post->hidden_proof     = $request->hidden_proof;
+        $post->occurrence_time  = $request->occurrence_time;
+        $post->occurrence_date  = $request->occurrence_date;
+        $post->location         = $request->location;
+        $post->geo_lat          = $request->latitude;
+        $post->geo_long         = $request->longitude;
         $post->contact_number = $request->contact_number;
         $post->hide_private_info = $request->hide_private_info;
         $post->type = $request->type;
@@ -221,6 +225,8 @@ class PostController extends Controller
             'occurrence_time'   => $request->occurrence_time,
             'occurrence_date'   => $request->occurrence_date,
             'location'          => $request->location,
+            'geo_lat'          => $request->latitude,
+            'geo_long'          => $request->longitude,
             'contact_number'    => $request->contact_number,
             'hide_private_info' => $request->hide_private_info,
             'images'            => json_encode($imagePaths),
@@ -229,6 +235,20 @@ class PostController extends Controller
         ]);
 
         return redirect()->back()->with('post_message', 'Post added successfully!');
+    }
+
+    public function funFacts()
+    {
+        $posts = Post::with('category')
+                    ->where('status', 'approved')
+                    ->latest()
+                    ->take(6)
+                    ->get();
+        $foundCount = Post::where('type', 'found')->where('status', 'approved')->count();
+        $lostCount = Post::where('type', 'lost')->where('status', 'approved')->count();
+        $resolvedCount = Post::where('status', 'resolved')->count();
+
+        return view('index', compact('posts', 'foundCount', 'lostCount', 'resolvedCount'));
     }
 
 

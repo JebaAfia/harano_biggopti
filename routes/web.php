@@ -7,12 +7,17 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
 
 Route::get('/dashboard', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/', [PostController::class, 'recentPosts'])->name('index');
+Route::get('/', [PostController::class, 'funFacts'])->name('index');
+Route::get('/all_posts', [PostController::class, 'allPosts'])->name('post.all_posts');
+Route::get('/posts_details/{id}', [PostController::class, 'postsDetails'])->name('post.view_post_details');
+
+Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -40,8 +45,10 @@ Route::middleware('admin')->group(function () {
     Route::put('/update_post/{id}', [PostController::class, 'postUpdatePost'])->name('admin.post.post_update_post');
     Route::delete('/delete_post/{id}', [PostController::class, 'deletePost'])->name('admin.post.delete_post');
 
-    Route::get('/all_posts', [PostController::class, 'allPosts'])->name('post.all_posts');
-    Route::get('/posts_details/{id}', [PostController::class, 'postsDetails'])->name('post.view_post_details');
+
+
+
+
 });
 
 require __DIR__.'/auth.php';

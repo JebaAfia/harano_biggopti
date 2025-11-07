@@ -54,9 +54,17 @@
 
                     <!-- Location -->
                     <div class="col-md-6">
-                        <label for="location" class="form-label fw-bold">Location</label>
-                        <input type="text" name="location" id="location" class="form-control"
+                        <label for="autocomplete" class="form-label fw-bold">Location</label>
+                        <input type="text" id="autocomplete" name="location" class="form-control"
                                value="{{ old('location', $post->location) }}">
+                    </div>
+                    <div class="col-md-6">
+                        {{-- <label for="latitude" class="form-label fw-bold">Latitude</label> --}}
+                        <input type="hidden" id="latitude" name="latitude" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        {{-- <label for="longitude" class="form-label fw-bold">Longitude</label> --}}
+                        <input type="hidden" id="longitude" name="longitude" class="form-control">
                     </div>
 
                     <!-- Contact Number -->

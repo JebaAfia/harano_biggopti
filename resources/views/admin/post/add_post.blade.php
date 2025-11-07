@@ -79,14 +79,24 @@
 
                         <!-- Location -->
                         <div class="mb-3">
-                            <label for="location" class="form-label">Location</label>
-                            <input type="text" name="location" id="location"
+                            <label for="autocomplete" class="form-label">Location</label>
+                            <input type="text" id="autocomplete" name="location"
                                    class="form-control @error('location') is-invalid @enderror"
                                    placeholder="Enter location"
                                    value="{{ old('location') }}">
                             @error('location')
                                 <span class="text-danger small">{{ $message }}</span>
                             @enderror
+                        </div>
+                        <div class="mb-3">
+                            {{-- <label for="latitude" class="form-label">Latitude</label> --}}
+                            <input type="hidden" id="latitude" name="latitude"
+                                   class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            {{-- <label for="longitude" class="form-label">Longitude</label> --}}
+                            <input type="hidden" id="longitude" name="longitude"
+                                   class="form-control">
                         </div>
 
                         <!-- Contact Number -->
@@ -146,6 +156,7 @@
                                 <option value="">-- Select Status --</option>
                                 <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
                                 <option value="approved" {{ old('status') == 'approved' ? 'selected' : '' }}>Approved</option>
+                                <option value="resolved" {{ old('status') == 'resolved' ? 'selected' : '' }}>Resolved</option>
                             </select>
                             @error('status')
                                 <span class="text-danger small">{{ $message }}</span>

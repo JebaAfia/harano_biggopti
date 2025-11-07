@@ -131,6 +131,7 @@ body {
 
 
 .section-heading {
+    margin-top: 50px;
   margin-bottom: 70px;
 }
 
@@ -704,6 +705,7 @@ Banner Style
 */
 
 .main-banner .item {
+    position: relative;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -712,15 +714,15 @@ Banner Style
 }
 
 .main-banner .item-1 {
-  background-image: url(../images/banner-01.jpg);
+  background-image: url(../images/banner1.png);
 }
 
 .main-banner .item-2 {
-  background-image: url(../images/banner-02.jpg);
+  background-image: url(../images/banner2.jpg);
 }
 
 .main-banner .item-3 {
-  background-image: url(../images/banner-03.jpg);
+  background-image: url(../images/banner3.jpg);
 }
 
 .main-banner .item span.category {
@@ -804,7 +806,19 @@ Banner Style
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.5);
 }
-
+.main-banner .item .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* black with 50% opacity */
+  z-index: 1;
+}
+.main-banner .item .header-text {
+  position: relative;
+  z-index: 2; /* text above overlay */
+}
 
 
 /*
@@ -925,10 +939,6 @@ Video Style
 */
 
 .video {
-  background-image: url(../images/video-bg.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
   padding: 100px 0px 250px 0px;
   position: relative;
 }
@@ -942,6 +952,10 @@ Video Style
 }
 
 .video-content .video-frame {
+    background-image: url(../images/video-frame.jpg);
+    background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
   position: relative;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
@@ -966,6 +980,36 @@ Video Style
   color: #f35525;
   outline: 15px solid rgba(254, 85, 37, 0.5);
   font-size: 18px;
+}
+.video-frame {
+  position: relative;
+  cursor: pointer;
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: 580px;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  color: #fff;
+  background: rgba(0,0,0,0.3); /* subtle overlay for nice effect */
+  pointer-events: none; /* click passes to video frame */
+  transition: background 0.3s;
+}
+
+.video-frame:hover .video-overlay {
+  background: rgba(0,0,0,0.5);
 }
 
 /*

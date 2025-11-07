@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBN3fjKJKkzl-JcrLX_eSBpmFWFUuXh6A&libraries=places&callback=initAutocomplete"
+        async
+        defer
+    ></script>
 <!--
 
 TemplateMo 591 villa agency
@@ -47,11 +54,7 @@ https://templatemo.com/tm-591-villa-agency
                     <ul class="nav">
                       <li><a href="{{ route('index') }}">Home</a></li>
                       <li><a href="{{ route('post.new_post') }}" >New Post</a></li>
-                      @auth
                       <li><a href="{{ route('post.all_posts') }}">All Posts</a></li>
-                      @else
-                      <li><a href="{{ route('login') }}">All Posts</a></li>
-                      @endauth
 
                       @if (Auth::check())
                         <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -95,6 +98,74 @@ https://templatemo.com/tm-591-villa-agency
     </footer>
   <!-- Footer -->
   <<!-- Scripts -->
+  <script>
+    // ✅ This name MUST match the callback in the Google Maps script URL
+    function initAutocomplete() {
+      var input = document.getElementById('autocomplete');
+      var autocomplete = new google.maps.places.Autocomplete(input, { types: ['geocode'] });
+
+      autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+
+        if (!place.geometry) {
+          alert("No details available for the selected address!");
+          return;
+        }
+
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+
+        $('#latitude').val(lat);
+        $('#longitude').val(lng);
+      });
+    }
+  </script>
+    <script>
+    function playVideo(e) {
+        e.preventDefault();
+        var video = document.getElementById('myVideo');
+        video.play();
+        e.target.style.display = 'none'; // Hide play icon after click
+    }
+    </script>
+    <script>
+const video = document.getElementById('myVideo');
+const playOverlay = document.getElementById('playOverlay');
+
+function toggleVideo() {
+  if (video.paused) {
+    video.play();
+    playOverlay.style.display = 'none';
+  } else {
+    video.pause();
+    playOverlay.style.display = 'flex';
+  }
+}
+
+// Click anywhere on the video frame
+document.getElementById('videoFrame').addEventListener('click', toggleVideo);
+
+// When video ends, show overlay again
+video.addEventListener('ended', () => {
+  playOverlay.style.display = 'flex';
+});
+</script>
+<!-- Counter animation script -->
+<script>
+$('.count-number').each(function () {
+    $(this).prop('Counter',0).animate({
+        Counter: $(this).data('to')
+    }, {
+        duration: $(this).data('speed'),
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    });
+});
+</script>
+
+
   <!-- Bootstrap core JavaScript -->
   <script src="{{ asset('frontend/vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/bootstrap/js/bootstrap.min.js') }}"></script>

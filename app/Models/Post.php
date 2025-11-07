@@ -13,6 +13,8 @@ class Post extends Model
         'occurrence_date',
         'occurrence_time',
         'location',
+        'geo_lat',
+        'geo_long',
         'contact_number',
         'hide_private_info',
         'images',

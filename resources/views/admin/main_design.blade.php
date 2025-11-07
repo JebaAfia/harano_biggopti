@@ -6,6 +6,12 @@
   <title>Harano Biggopti - Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBN3fjKJKkzl-JcrLX_eSBpmFWFUuXh6A&libraries=places&callback=initAutocomplete"
+        async
+        defer
+    ></script>
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -131,7 +137,7 @@
 
         <!-- Report Dropdown -->
         <a data-bs-toggle="collapse" href="#reportMenu" role="button" aria-expanded="false" aria-controls="reportMenu">
-            <i class="fa fa-file-alt me-2"></i> Report <i class="fa fa-chevron-down float-end"></i>
+            <i class="fa fa-file-alt me-2"></i> Post <i class="fa fa-chevron-down float-end"></i>
         </a>
         <div class="collapse submenu" id="reportMenu">
             <a href="{{ route('admin.post.add_post') }}">➤ Add Post</a>
@@ -206,6 +212,28 @@
     </div>
   </div>
 
+  <script>
+    // ✅ This name MUST match the callback in the Google Maps script URL
+    function initAutocomplete() {
+      var input = document.getElementById('autocomplete');
+      var autocomplete = new google.maps.places.Autocomplete(input, { types: ['geocode'] });
+
+      autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+
+        if (!place.geometry) {
+          alert("No details available for the selected address!");
+          return;
+        }
+
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+
+        $('#latitude').val(lat);
+        $('#longitude').val(lng);
+      });
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

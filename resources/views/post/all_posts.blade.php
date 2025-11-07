@@ -1,3 +1,4 @@
+
 @extends('main_design')
 
 @section('post.all_posts')
@@ -31,6 +32,7 @@
                                 <option value="">All Types</option>
                                 <option value="lost" {{ request('type') == 'lost' ? 'selected' : '' }}>Lost</option>
                                 <option value="found" {{ request('type') == 'found' ? 'selected' : '' }}>Found</option>
+                                <option value="resolved" {{ request('type') == 'resolved' ? 'selected' : '' }}>Resolved</option>
                             </select>
                         </div>
 
